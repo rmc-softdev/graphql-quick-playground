@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./AnimeSearch.css";
+import "./PokeSearch.css";
 import SearchedPokes from "./SearchedPokes";
 
 const PokeSearch = (props) => {

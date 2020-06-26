@@ -1,14 +1,13 @@
 import React, { useState } from "react";
-import "./SearchedAnime.css";
+import "./SearchedPoke.css";
 import { Link } from "react-router-dom";
 
 const SearchedPokes = ({ searchedContent }) => {
   // let reducedContent = searchedContent.slice(0, 5);
 
   const renderContent = () => {
-    return searchedContent.map((poke) => (
-      <div to={`/`}>
-        {console.log(poke)}
+    return searchedContent.slice(0, 10).map((poke) => (
+      <Link to={`/pokemon/${poke.name.toLowerCase()}`}>
         <li key={poke.id}>
           <div className="results-items">
             <div className="result content">
@@ -18,7 +17,7 @@ const SearchedPokes = ({ searchedContent }) => {
             <div className="results media">{poke.number}</div>
           </div>
         </li>
-      </div>
+      </Link>
     ));
   };
 
