@@ -32,7 +32,6 @@
   transition-timing-function: ease-in-out;
   -moz-box-flex: 2;
   height: 350px;
-  margin-bottom: 90px;
   position: relative;
   opacity: 0.85;
   transition: all 0.3s ease-in-out 0s;

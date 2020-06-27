@@ -15,6 +15,7 @@ export const PokemonsShowCase = () => {
   return (
     <>
       <PokeSearch pokemons={pokemons} />
+      <></>
       <div className="pokemons__list">
         {pokemons &&
           pokemons.map((pokemon) => (

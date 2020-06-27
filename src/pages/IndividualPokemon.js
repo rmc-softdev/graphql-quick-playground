@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { INDIVIDUALPOKEMON_QUERY } from "../graphql/get-pokemons";
+import Modal from "../shared/components/Modal";
+import { motion } from "framer-motion";
 
 import "./IndividualPokemon.css";
 
@@ -10,6 +12,11 @@ const IndividualPokemon = () => {
   const { data: { pokemon = {} } = {} } = useQuery(INDIVIDUALPOKEMON_QUERY, {
     variables: { name: `${params.name && params.name}` },
   });
+  const [showMap, setShowMap] = useState(false);
+
+  const openMapHandler = () => setShowMap(true);
+
+  const closeMapHandler = () => setShowMap(false);
 
   const {
     image,
@@ -34,18 +41,131 @@ const IndividualPokemon = () => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
+            flexDirection: "column",
+            cursor: "auto",
           }}
         >
+          <h3>
+            <span
+              className="place-item__map"
+              onClick={openMapHandler}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <span
+                style={{
+                  width: "max-content",
+                  cursor: "pointer",
+                  marginRight: "10px",
+                }}
+              >
+                {" "}
+                Try to catch this poke
+              </span>
+              <motion.div
+                onClick={openMapHandler}
+                style={{ cursor: "pointer" }}
+                initial={{
+                  rotate: 0,
+                }}
+                animate={{
+                  scale: [1, 1.03, 1, 1.03, 1, 1.03, 1, 1.03, 1, 1.03, 1],
+                  rotate: [0, 10, -10, 10, -10, 10, -10, 10, -10, 0],
+                  transition: {
+                    rotate: {
+                      duration: 3,
+                      ease: "easeInOut",
+                      yoyo: Infinity,
+                      repeatDelay: 1,
+                    },
+                    scale: {
+                      duration: 1.4,
+                      ease: "easeInOut",
+                      yoyo: Infinity,
+                      repeatDelay: 0.3,
+                    },
+                  },
+                }}
+              >
+                <img
+                  src="https://i.ibb.co/jVR7zqK/Pin-Clipart-com-cyclone-clip-art-622272.png"
+                  alt=""
+                  style={{ height: "32px" }}
+                />
+              </motion.div>
+            </span>
+            <span>
+              <Modal
+                show={showMap}
+                onCancel={closeMapHandler}
+                header={`So you want to catch a ${name}...`}
+                contentClass="place-item__modal-content"
+                footerClass="place-item__modal-actions"
+                footer={
+                  <span
+                    onClick={closeMapHandler}
+                    style={{
+                      cursor: "pointer",
+                      backgroundColor: "rebeccapurple",
+                      padding: "5px",
+                      color: "#fff",
+                    }}
+                  >
+                    CLOSE
+                  </span>
+                }
+              >
+                <div className="pokemons__form">
+                  <form
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <label htmlFor="name" style={{ marginBottom: "5px" }}>
+                      {" "}
+                      Then you must really know him! What's his ID?
+                    </label>
+                    <div>
+                      <span
+                        style={{
+                          fontSize: "13px",
+                          textAlign: "center",
+                          color: `var(--primary-color)`,
+                          marginRight: "5px ",
+                        }}
+                      >
+                        e.g., 007
+                      </span>
+                      <input
+                        type="text"
+                        id="name"
+                        placeholder={`Type ${name}'s ID here...`}
+                        style={{
+                          width: "180px",
+                          padding: "6px",
+                          color: "var(--primary-color)",
+                          fontWeight: "700",
+                        }}
+                      />
+                    </div>
+                  </form>
+                </div>
+              </Modal>
+            </span>
+          </h3>
           <div
             className="pokemon"
             style={{
               width: "450px",
               borderRadius: "10px",
-              height: "750px",
+              height: "auto",
               display: "flex",
               flexDirection: "column",
               justifyContent: "space-between",
               alignItems: "center",
+              cursor: "auto",
             }}
           >
             <div className="pokemon__image">
@@ -96,7 +216,7 @@ const IndividualPokemon = () => {
                 {pokemon.types && (
                   <div>
                     {" "}
-                    <h3>Types</h3>
+                    <h3>{types?.length !== 1 ? "Types" : "Type"} </h3>
                     <ul
                       style={{
                         display: "flex",

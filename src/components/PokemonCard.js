@@ -14,12 +14,12 @@ export const PokemonCard = ({ pokemon: { name, image, number, types } }) => {
           <h3 style={{ margin: "0 15px" }}>{name}</h3>
         </div>
         <div className="pokemon__meta">
-          <p style={{ margin: "0 15px" }}>#{number}</p>
+          <h4 style={{ margin: "0 15px" }}>#{number}</h4>
           <ul
             style={{
               display: "flex",
               justifyContent: "center",
-              padding: "0 35px",
+              margin: "15px 0",
             }}
           >
             {types?.map((el) => (

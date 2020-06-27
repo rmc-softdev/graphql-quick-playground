@@ -13,3 +13,8 @@
 .pokemon:hover .pokemon__meta {
   font-weight: 500;
 }
+
+#name:focus {
+  border: 1px solid blueviolet;
+  padding: 6px;
+}
