@@ -1,0 +1,15 @@
+.pokemon__meta li {
+  background-color: rebeccapurple;
+  color: #000;
+  padding: 6px;
+  border-radius: 4px;
+  width: 50px;
+}
+
+.pokemon__meta ul:last-child {
+  margin-bottom: 20px;
+}
+
+.pokemon:hover .pokemon__meta {
+  font-weight: 500;
+}

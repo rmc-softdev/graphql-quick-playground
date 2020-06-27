@@ -1,15 +1,52 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+
+:root {
+  --modal-duration: 1s;
+  --primary-color: #1d1d1d;
+  --secondary-color: #f98426;
+  --mainBlue: #3b5da8;
+  --mainYellow: #ffcb05;
+  /* types of Pokémons */
+  --normal: #a8a878;
+  --fire: #f08030;
+  --fighting: #c03028;
+  --water: #6890f0;
+  --flying: #a890f0;
+  --grass: #78c850;
+  --poison: #a040a0;
+  --electric: #f8d030;
+  --ground: #e0c068;
+  --psychic: #f85888;
+  --rock: #b8a038;
+  --ice: #98d8d8;
+  --bug: #a8b820;
+  --dragon: #7038f8;
+  --ghost: #705898;
+  --dark: #705848;
+  --steel: #b8b8d0;
+  --fairy: #ee99ac;
+}
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: #f9f9fb;
+  font-family: "Roboto", sans-serif;
 }
 
 ul {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 a {
   color: #000;
   text-decoration: none;
+}
+
+p {
+  margin: 0;
+  padding: 0;
 }

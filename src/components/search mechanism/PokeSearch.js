@@ -5,7 +5,7 @@ import SearchedPokes from "./SearchedPokes";
 const PokeSearch = (props) => {
   const [text, setText] = useState(""); // this is the searched word
   const [searchedPoke, setSearchedPoke] = useState([]);
-  const [fill, setFill] = useState("#acacac");
+  const [fill, setFill] = useState("#000");
 
   const onTermSubmit = (e) => {
     e.preventDefault();

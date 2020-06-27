@@ -1,7 +1,7 @@
 import React from "react";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
-import { PokemonsContainer } from "./containers/PokemonsContainer";
+import { PokemonsShowCase } from "./pages/PokemonsShowCase";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Route } from "react-router-dom";
 
@@ -17,7 +17,7 @@ const App = () => {
     <ApolloProvider client={client}>
       <Router>
         <main>
-          <Route path="/" exact component={PokemonsContainer} />
+          <Route path="/" exact component={PokemonsShowCase} />
           <Route path="/pokemon/:name" component={IndividualPokemon} />
         </main>
       </Router>

@@ -42,8 +42,15 @@
 }
 
 .results-items:hover .resultsName {
-  font-weight: 600;
+  transform: scale(1.15);
   color: rgb(14, 4, 4);
+  transition: scale 0.5s, color 0.5s;
+}
+
+.results-items:hover img {
+  transform: scale(1.05);
+  transform: rotate(3deg);
+  transition: all 0.2s;
 }
 
 .results.results.title {
@@ -67,8 +74,9 @@
 }
 
 .result.content img {
-  width: 45px;
+  width: 65px;
   height: 65px;
+  transition: all 0.2s;
 }
 
 .results.media {
@@ -91,6 +99,8 @@
 }
 
 .resultsName {
+  transition: scale 0.5s, color 0.5s;
+  color: #000;
   padding-left: 10px;
 }
 
