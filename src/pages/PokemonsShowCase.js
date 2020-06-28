@@ -5,12 +5,19 @@ import { PokemonCard } from "../components/PokemonCard";
 import PokeSearch from "../components/search mechanism/PokeSearch";
 
 import "./PokemonsContainer.css";
+import LoadingSpinner from "../utils/LoadingSpinner";
 
 export const PokemonsShowCase = () => {
   //just doing some good ol' destructuring
-  const { data: { pokemons = [] } = {} } = useQuery(POKEMONS_QUERY, {
-    variables: { first: 151 },
-  });
+  const { loading, error, data: { pokemons = [] } = {} } = useQuery(
+    POKEMONS_QUERY,
+    {
+      variables: { first: 151 },
+    }
+  );
+
+  if (loading) return <LoadingSpinner asOverlay />;
+  if (error) return `Error! ${error.message}`;
 
   return (
     <>

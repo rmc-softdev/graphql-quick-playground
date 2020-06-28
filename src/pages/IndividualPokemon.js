@@ -9,6 +9,7 @@ import Modal from "../shared/components/Modal";
 import PokeDex from "../shared/PokeDex";
 
 import "./IndividualPokemon.css";
+import LoadingSpinner from "../utils/LoadingSpinner";
 
 const IndividualPokemon = () => {
   const params = useParams();
@@ -18,10 +19,14 @@ const IndividualPokemon = () => {
   const caughtPokemons = useSelector((state) => state.caughtPokemons);
   const dispatch = useDispatch();
 
-  const { data: { pokemon = {} } = {} } = useQuery(INDIVIDUALPOKEMON_QUERY, {
-    variables: { name: `${params.name && params.name}` },
-  });
-
+  const { loading, error, data: { pokemon = {} } = {} } = useQuery(
+    INDIVIDUALPOKEMON_QUERY,
+    {
+      variables: { name: `${params.name && params.name}` },
+    }
+  );
+  if (loading) return <LoadingSpinner asOverlay />;
+  if (error) return `Error! ${error.message}`;
   const {
     image,
     name,
