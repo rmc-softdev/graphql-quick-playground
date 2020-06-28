@@ -11,31 +11,22 @@ import { PokemonsShowCase } from "./pages/PokemonsShowCase";
 import store from "./store";
 
 import "./App.css";
+import NavigationLogo from "./shared/NavigationLogo";
 
 const App = () => {
   const client = new ApolloClient({
     uri: "https://graphql-pokemon.now.sh",
   });
 
-  const [caughtPokemons, setCaughtPokemons] = useState([]);
-
-  const handlePokemons = (pokemon) => {
-    setCaughtPokemons((prevState) => [...prevState, pokemon]);
-  };
-
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
         <Router>
-          <main>
-            <Route path="/" exact component={PokemonsShowCase} />
-            <Route path="/pokemon/:name">
-              <IndividualPokemon
-                caughtPokemons={caughtPokemons}
-                handlePokemons={handlePokemons}
-              />
-            </Route>
-          </main>
+          <NavigationLogo />
+          <Route path="/" exact component={PokemonsShowCase} />
+          <Route path="/pokemon/:name">
+            <IndividualPokemon />
+          </Route>
         </Router>
       </Provider>
     </ApolloProvider>

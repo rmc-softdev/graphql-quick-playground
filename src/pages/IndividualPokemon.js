@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
-import { motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { INDIVIDUALPOKEMON_QUERY } from "../graphql/get-pokemons";
 import Modal from "../shared/components/Modal";
@@ -10,11 +10,12 @@ import PokeDex from "../shared/PokeDex";
 
 import "./IndividualPokemon.css";
 
-const IndividualPokemon = (props) => {
+const IndividualPokemon = () => {
   const params = useParams();
   const [text, setText] = useState("");
+  const [showCongratulations, setShowCongratulations] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const pokekmons = useSelector((state) => state.caughtPokemons);
+  const caughtPokemons = useSelector((state) => state.caughtPokemons);
   const dispatch = useDispatch();
 
   const { data: { pokemon = {} } = {} } = useQuery(INDIVIDUALPOKEMON_QUERY, {
@@ -37,18 +38,20 @@ const IndividualPokemon = (props) => {
   const handlePokemons = () => {
     if (text === number) {
       let shouldUpdate = true;
-      // caughtPokemons.forEach((el) => {
-      //   if (el.number === text) {
-      //     shouldUpdate = false;
-      //   }
-      // });
+      caughtPokemons.forEach((el) => {
+        if (el.number === text) {
+          shouldUpdate = false;
+        }
+      });
       if (shouldUpdate) {
         setText("");
         dispatch({
           type: "ADD_POKE",
           payload: pokemon,
         });
-        props.handlePokemons(pokemon);
+        setTimeout(() => {
+          setShowCongratulations(false);
+        }, 3000);
       }
     }
   };
@@ -66,7 +69,6 @@ const IndividualPokemon = (props) => {
         <div
           style={{
             display: "flex",
-            justifyContent: "center",
             alignItems: "center",
             height: "100vh",
             flexDirection: "column",
@@ -185,66 +187,104 @@ const IndividualPokemon = (props) => {
 
                     <div>
                       {handlePokemons()}
-                      <div>
-                        {props?.caughtPokemons?.map((el, index) => {
-                          if (index === props?.caughtPokemons.length - 1) {
-                            return (
-                              <>
-                                <h3 style={{ textAlign: "center" }}>
-                                  {" "}
-                                  Congratulations! You just caught an awesome{" "}
-                                  {el.name}!
-                                </h3>
-                                <div className="caughtPokemon">
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      alignItems: "center",
-                                      justifyContent: "space-around",
-                                    }}
-                                  >
-                                    {" "}
-                                    <h4
-                                      style={{
-                                        color: `var(--${types[0].toLowerCase()}`,
-                                        fontSize: "20px",
-                                      }}
-                                    >
-                                      {" "}
-                                      {el.name}{" "}
-                                    </h4>{" "}
-                                    <span
-                                      style={{
-                                        color: `var(--${types[0].toLowerCase()}`,
-                                        padding: "5px",
-                                      }}
-                                    >
-                                      {" "}
-                                      #{el.number}{" "}
-                                    </span>
-                                  </div>
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "center",
-                                      alignItems: "center",
-                                    }}
-                                  >
-                                    <img
-                                      src={el.image}
-                                      style={{ width: "250px" }}
-                                      alt={el.name}
-                                    />
-                                  </div>
-                                </div>
-                              </>
-                            );
-                          }
-                        })}
-                      </div>
+                      <AnimatePresence initial={false}>
+                        {showCongratulations && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{
+                              opacity: 1,
+                              transition: {
+                                opacity: {
+                                  delay: 2,
+                                  duration: 2,
+                                  ease: "easeInOut",
+                                },
+                              },
+                            }}
+                            transition={{
+                              duration: 1,
+                              ease: "easeInOut",
+                            }}
+                            exit={{ opacity: 0 }}
+                          >
+                            {caughtPokemons.length !== 0 &&
+                              caughtPokemons?.map((el, index) => {
+                                if (
+                                  index === caughtPokemons?.length - 1 &&
+                                  el.name === name
+                                ) {
+                                  return (
+                                    <>
+                                      <h3 style={{ textAlign: "center" }}>
+                                        {" "}
+                                        Congratulations! You just caught an
+                                        awesome {el.name}!
+                                        <p
+                                          style={{
+                                            fontSize: "15px",
+                                            marginTop: "6px",
+                                          }}
+                                        >
+                                          {" "}
+                                          Why stop here? Explore our PokeDex and
+                                          catch more
+                                        </p>
+                                      </h3>
+                                      <div className="caughtPokemon">
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "space-around",
+                                          }}
+                                        >
+                                          {" "}
+                                          <h4
+                                            style={{
+                                              color: `var(--${types[0].toLowerCase()}`,
+                                              fontSize: "20px",
+                                            }}
+                                          >
+                                            {" "}
+                                            {el.name}{" "}
+                                          </h4>{" "}
+                                          <span
+                                            style={{
+                                              color: `var(--${types[0].toLowerCase()}`,
+                                              padding: "5px",
+                                            }}
+                                          >
+                                            {" "}
+                                            #{el.number}{" "}
+                                          </span>
+                                        </div>
+                                        <div
+                                          style={{
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                          }}
+                                        >
+                                          <img
+                                            src={el.image}
+                                            style={{ width: "250px" }}
+                                            alt={el.name}
+                                          />
+                                        </div>
+                                      </div>
+                                    </>
+                                  );
+                                }
+                              })}
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                     </div>
                   </form>
-                  <PokeDex caughtPokemons={props?.caughtPokemons} />
+                  <PokeDex
+                    caughtPokemons={caughtPokemons}
+                    closeModalHandler={closeModalHandler}
+                  />
                 </div>
               </Modal>
             </span>
@@ -378,7 +418,6 @@ const IndividualPokemon = (props) => {
               </div>
             </div>
           </div>
-          <div>jesus</div>
         </div>
       )}
     </>
