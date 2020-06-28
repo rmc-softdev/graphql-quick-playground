@@ -35,7 +35,13 @@ const PokeDex = ({ closeModalHandler }) => {
           <ul style={{ padding: 0 }}>
             {caughtPokemons.map((poke) => (
               <li key={poke?.id}>
-                <div className="results-items">
+                <div
+                  className="results-items"
+                  style={{
+                    padding: "3px 0",
+                    borderBottom: "1px solid #cacaca",
+                  }}
+                >
                   <div className="result content">
                     <div style={{ position: "relative" }}>
                       <span
@@ -53,7 +59,15 @@ const PokeDex = ({ closeModalHandler }) => {
                         <img src={poke?.image} alt="" />{" "}
                       </Link>
                     </div>
-                    <span className="resultsName">{poke?.name}</span>
+                    <span className="resultsName">
+                      <Link
+                        to={`/pokemon/${poke?.name?.toLowerCase()}`}
+                        onClick={closeModalHandler}
+                      >
+                        {" "}
+                        {poke?.name}{" "}
+                      </Link>
+                    </span>
                   </div>
                   <div className="results media">{poke?.number}</div>
                 </div>

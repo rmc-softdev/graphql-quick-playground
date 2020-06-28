@@ -66,6 +66,7 @@ const IndividualPokemon = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    handlePokemons();
   };
 
   const openModalHandler = () => setShowModal(true);
@@ -167,9 +168,9 @@ const IndividualPokemon = () => {
                   >
                     <label htmlFor="name" style={{ marginBottom: "5px" }}>
                       {" "}
-                      Then you must really know him! What's his ID?
+                      Then you must really love him... What's his ID?
                     </label>
-                    <div>
+                    <div style={{ display: "flex", alignItems: "center" }}>
                       <span
                         style={{
                           fontSize: "13px",
@@ -183,9 +184,9 @@ const IndividualPokemon = () => {
                       <input
                         type="text"
                         id="name"
-                        placeholder={`Type ${name}'s ID here...`}
+                        placeholder={`Type ${name}'s ID here.`}
                         style={{
-                          width: "180px",
+                          width: "200px",
                           padding: "8px",
                           color: "var(--primary-color)",
                           fontWeight: "700",
@@ -194,10 +195,19 @@ const IndividualPokemon = () => {
                         onChange={(e) => setText(e.target.value)}
                         value={text}
                       />
+                      <img
+                        src="https://img.icons8.com/color/96/000000/pokedex.png"
+                        style={{
+                          width: "35px",
+                          marginLeft: "5px",
+                          cursor: "pointer",
+                        }}
+                        alt="pokedex"
+                        onClick={submitHandler}
+                      />
                     </div>
 
                     <div>
-                      {handlePokemons()}
                       <AnimatePresence initial={false}>
                         {showCongratulations && (
                           <motion.div
