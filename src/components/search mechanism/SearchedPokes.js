@@ -36,7 +36,7 @@ const SearchedPokes = ({ searchedContent }) => {
             </button>*/}
           </div>
           <div className="results type">
-            <span> Pokemons</span>
+            <span> Pokemons </span>
           </div>
           <div className="results showcase">
             {searchedContent.length !== 0 ? (

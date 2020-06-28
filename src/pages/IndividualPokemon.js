@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
+import { motion } from "framer-motion";
+import { useSelector, useDispatch } from "react-redux";
+
 import { INDIVIDUALPOKEMON_QUERY } from "../graphql/get-pokemons";
 import Modal from "../shared/components/Modal";
-import { motion } from "framer-motion";
+import PokeDex from "../shared/PokeDex";
 
 import "./IndividualPokemon.css";
 
-const IndividualPokemon = () => {
+const IndividualPokemon = (props) => {
   const params = useParams();
+  const [text, setText] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const pokekmons = useSelector((state) => state.caughtPokemons);
+  const dispatch = useDispatch();
+
   const { data: { pokemon = {} } = {} } = useQuery(INDIVIDUALPOKEMON_QUERY, {
     variables: { name: `${params.name && params.name}` },
   });
-  const [showMap, setShowMap] = useState(false);
-
-  const openMapHandler = () => setShowMap(true);
-
-  const closeMapHandler = () => setShowMap(false);
 
   const {
     image,
@@ -30,7 +33,32 @@ const IndividualPokemon = () => {
     resistant,
     weaknesses,
   } = pokemon;
-  console.log(attacks?.special);
+
+  const handlePokemons = () => {
+    if (text === number) {
+      let shouldUpdate = true;
+      // caughtPokemons.forEach((el) => {
+      //   if (el.number === text) {
+      //     shouldUpdate = false;
+      //   }
+      // });
+      if (shouldUpdate) {
+        setText("");
+        dispatch({
+          type: "ADD_POKE",
+          payload: pokemon,
+        });
+        props.handlePokemons(pokemon);
+      }
+    }
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
+
+  const openModalHandler = () => setShowModal(true);
+  const closeModalHandler = () => setShowModal(false);
 
   return (
     <>
@@ -47,8 +75,8 @@ const IndividualPokemon = () => {
         >
           <h3>
             <span
-              className="place-item__map"
-              onClick={openMapHandler}
+              className="place-item__Modal"
+              onClick={openModalHandler}
               style={{ display: "flex", alignItems: "center" }}
             >
               <span
@@ -62,7 +90,7 @@ const IndividualPokemon = () => {
                 Try to catch this poke
               </span>
               <motion.div
-                onClick={openMapHandler}
+                onClick={openModalHandler}
                 style={{ cursor: "pointer" }}
                 initial={{
                   rotate: 0,
@@ -95,14 +123,14 @@ const IndividualPokemon = () => {
             </span>
             <span>
               <Modal
-                show={showMap}
-                onCancel={closeMapHandler}
+                show={showModal}
+                onCancel={closeModalHandler}
                 header={`So you want to catch a ${name}...`}
                 contentClass="place-item__modal-content"
                 footerClass="place-item__modal-actions"
                 footer={
                   <span
-                    onClick={closeMapHandler}
+                    onClick={closeModalHandler}
                     style={{
                       cursor: "pointer",
                       backgroundColor: "rebeccapurple",
@@ -122,6 +150,7 @@ const IndividualPokemon = () => {
                       alignItems: "center",
                       justifyContent: "center",
                     }}
+                    onSubmit={submitHandler}
                   >
                     <label htmlFor="name" style={{ marginBottom: "5px" }}>
                       {" "}
@@ -144,13 +173,78 @@ const IndividualPokemon = () => {
                         placeholder={`Type ${name}'s ID here...`}
                         style={{
                           width: "180px",
-                          padding: "6px",
+                          padding: "8px",
                           color: "var(--primary-color)",
                           fontWeight: "700",
+                          border: "1px solid #cacaca",
                         }}
+                        onChange={(e) => setText(e.target.value)}
+                        value={text}
                       />
                     </div>
+
+                    <div>
+                      {handlePokemons()}
+                      <div>
+                        {props?.caughtPokemons?.map((el, index) => {
+                          if (index === props?.caughtPokemons.length - 1) {
+                            return (
+                              <>
+                                <h3 style={{ textAlign: "center" }}>
+                                  {" "}
+                                  Congratulations! You just caught an awesome{" "}
+                                  {el.name}!
+                                </h3>
+                                <div className="caughtPokemon">
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "space-around",
+                                    }}
+                                  >
+                                    {" "}
+                                    <h4
+                                      style={{
+                                        color: `var(--${types[0].toLowerCase()}`,
+                                        fontSize: "20px",
+                                      }}
+                                    >
+                                      {" "}
+                                      {el.name}{" "}
+                                    </h4>{" "}
+                                    <span
+                                      style={{
+                                        color: `var(--${types[0].toLowerCase()}`,
+                                        padding: "5px",
+                                      }}
+                                    >
+                                      {" "}
+                                      #{el.number}{" "}
+                                    </span>
+                                  </div>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "center",
+                                      alignItems: "center",
+                                    }}
+                                  >
+                                    <img
+                                      src={el.image}
+                                      style={{ width: "250px" }}
+                                      alt={el.name}
+                                    />
+                                  </div>
+                                </div>
+                              </>
+                            );
+                          }
+                        })}
+                      </div>
+                    </div>
                   </form>
+                  <PokeDex caughtPokemons={props?.caughtPokemons} />
                 </div>
               </Modal>
             </span>
@@ -166,6 +260,7 @@ const IndividualPokemon = () => {
               justifyContent: "space-between",
               alignItems: "center",
               cursor: "auto",
+              marginBottom: "200px",
             }}
           >
             <div className="pokemon__image">
@@ -175,7 +270,7 @@ const IndividualPokemon = () => {
                   style={{
                     fontSize: "23px",
                     fontWeight: 700,
-                    borderBottom: "2px solid rebeccapurple",
+                    borderBottom: `4px solid var(--${types[0].toLowerCase()})`,
                     margin: 0,
                     paddingBottom: "15px",
                   }}
@@ -198,13 +293,14 @@ const IndividualPokemon = () => {
                     padding: "0 35px",
                   }}
                 >
-                  {attacks.special.map((el) => (
+                  {attacks.special.map((el, index) => (
                     <li
                       style={{
                         width: "auto",
                         padding: "5px 10px",
                         color: "#fff",
                       }}
+                      key={el.name + index}
                     >
                       {" "}
                       {el.name}{" "}
@@ -224,12 +320,13 @@ const IndividualPokemon = () => {
                         padding: "0 35px",
                       }}
                     >
-                      {types.map((el) => (
+                      {types.map((el, index) => (
                         <li
                           style={{
                             margin: "0 5px",
                             backgroundColor: `var(--${el.toLowerCase()})`,
                           }}
+                          key={el + index}
                         >
                           {" "}
                           {el}{" "}
@@ -244,11 +341,12 @@ const IndividualPokemon = () => {
                         padding: "0 35px",
                       }}
                     >
-                      {resistant.map((el) => (
+                      {resistant.map((el, index) => (
                         <li
                           style={{
                             backgroundColor: `var(--${el.toLowerCase()})`,
                           }}
+                          key={el + index}
                         >
                           {" "}
                           {el}{" "}
@@ -263,11 +361,12 @@ const IndividualPokemon = () => {
                         padding: "0 35px",
                       }}
                     >
-                      {weaknesses.map((el) => (
+                      {weaknesses.map((el, index) => (
                         <li
                           style={{
                             backgroundColor: `var(--${el.toLowerCase()})`,
                           }}
+                          key={el + index}
                         >
                           {" "}
                           {el}{" "}
@@ -279,6 +378,7 @@ const IndividualPokemon = () => {
               </div>
             </div>
           </div>
+          <div>jesus</div>
         </div>
       )}
     </>

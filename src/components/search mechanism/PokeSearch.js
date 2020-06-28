@@ -22,7 +22,13 @@ const PokeSearch = (props) => {
 
   return (
     <div className="search container">
-      <h1 className="search slogan">{"Gotta Catch'Em All"}</h1>
+      <div className="search slogan">
+        <img
+          src="https://i.ibb.co/gvWwy41/pokelogo2.png"
+          style={{ width: "200px" }}
+          alt=""
+        />
+      </div>
       <form onSubmit={onTermSubmit}>
         <div className="search-wrapper">
           <span className="search-icon">

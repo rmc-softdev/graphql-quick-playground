@@ -1,12 +1,14 @@
 .modal {
   z-index: 100;
   position: fixed;
-  top: 22vh;
+  top: 5vh;
   left: 10%;
   width: 80%;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   border-radius: 8px;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .modal__header {

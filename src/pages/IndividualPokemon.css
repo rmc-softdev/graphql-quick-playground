@@ -18,3 +18,13 @@
   border: 1px solid blueviolet;
   padding: 6px;
 }
+
+.pokemon__delete-btn {
+  position: absolute;
+  left: -20px;
+  top: 30px;
+  background-color: red;
+  color: #fff;
+  padding: 5px;
+  font-size: 15px;
+}

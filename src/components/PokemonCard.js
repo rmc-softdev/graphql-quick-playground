@@ -6,7 +6,7 @@ import "./Pokemon.css";
 export const PokemonCard = ({ pokemon: { name, image, number, types } }) => {
   return (
     <Link to={`/pokemon/${name.toLowerCase()}`}>
-      <div className="pokemon">
+      <div className="pokemon main">
         <div className="pokemon__image">
           <img src={image} alt={name} />
         </div>
