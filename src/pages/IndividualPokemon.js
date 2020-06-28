@@ -57,6 +57,9 @@ const IndividualPokemon = () => {
         });
 
         setShowCongratulations(true);
+        setTimeout(() => {
+          setShowCongratulations(false);
+        }, 5000);
       }
     }
   };
