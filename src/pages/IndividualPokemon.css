@@ -32,3 +32,12 @@
 .pokemon li {
   font-weight: 700;
 }
+
+.pokemon__delete-btn {
+  display: none;
+}
+
+#modal-hook .results:hover .pokemon__delete-btn {
+  display: inline-block;
+  cursor: pointer;
+}

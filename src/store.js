@@ -15,24 +15,29 @@ if (localStorage.getItem("caughtpokes") === null) {
 }
 
 const rootReducer = (state = initialState, action) => {
+  let stateCopy;
   switch (action.type) {
     case "ADD_POKE":
-      let stateCopy = [...state.caughtPokemons, action.payload];
+      stateCopy = [...state.caughtPokemons, action.payload];
       localStorage.setItem("caughtpokes", JSON.stringify(stateCopy));
       return {
         ...state,
         caughtPokemons: [...state.caughtPokemons, action.payload],
       };
     case "DELETE_POKE":
+      stateCopy = [
+        ...state.caughtPokemons.filter((el) => {
+          return el.name !== action.payload.name;
+        }),
+      ];
+      localStorage.setItem("caughtpokes", JSON.stringify(stateCopy));
       return {
         ...state,
-        caughtPokemons: state.caughtPokemons.filter((el) => {
-          if (el.name !== action.payload) {
-            return false;
-          } else {
-            return true;
-          }
-        }),
+        caughtPokemons: [
+          ...state.caughtPokemons.filter((el) => {
+            return el.name !== action.payload.name;
+          }),
+        ],
       };
     default:
       return state;

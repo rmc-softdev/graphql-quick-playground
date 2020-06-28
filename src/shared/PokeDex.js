@@ -24,7 +24,7 @@ const PokeDex = (props) => {
         }}
       >
         {" "}
-        My Pokemons{" "}
+        Pokemons I love
       </div>
       <div
         className="results showcase"
