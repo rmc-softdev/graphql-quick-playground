@@ -398,7 +398,6 @@ const IndividualPokemon = () => {
                       style={{
                         display: "flex",
                         justifyContent: "space-around",
-                        padding: "0 35px",
                       }}
                     >
                       {resistant.map((el, index) => (
