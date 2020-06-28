@@ -23,7 +23,7 @@
   position: absolute;
   left: -20px;
   top: 30px;
-  background-color: red;
+  background-color: #d9534f;
   color: #fff;
   padding: 5px;
   font-size: 15px;
@@ -37,7 +37,7 @@
   display: none;
 }
 
-#modal-hook .results:hover .pokemon__delete-btn {
+#modal-hook .results li:hover .pokemon__delete-btn {
   display: inline-block;
   cursor: pointer;
 }

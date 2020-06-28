@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
-const PokeDex = (props) => {
+const PokeDex = ({ closeModalHandler }) => {
   const caughtPokemons = useSelector((state) => state.caughtPokemons);
   const dispatch = useDispatch();
 
@@ -46,7 +47,7 @@ const PokeDex = (props) => {
                       </span>
                       <Link
                         to={`/pokemon/${poke?.name?.toLowerCase()}`}
-                        onClick={props.closeModalHandler}
+                        onClick={closeModalHandler}
                       >
                         {" "}
                         <img src={poke?.image} alt="" />{" "}
@@ -68,6 +69,10 @@ const PokeDex = (props) => {
       </div>
     </>
   );
+};
+
+PokeDex.propTypes = {
+  closeModalHandler: PropTypes.func.isRequired,
 };
 
 export default PokeDex;

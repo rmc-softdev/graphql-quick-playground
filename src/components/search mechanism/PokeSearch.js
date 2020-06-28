@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import "./PokeSearch.css";
+import PropTypes from "prop-types";
+
 import SearchedPokes from "./SearchedPokes";
 
-const PokeSearch = (props) => {
+import "./PokeSearch.css";
+
+const PokeSearch = ({ pokemons }) => {
   const [text, setText] = useState(""); // this is the searched word
   const [searchedPoke, setSearchedPoke] = useState([]);
   const [fill, setFill] = useState("#000");
@@ -13,7 +16,7 @@ const PokeSearch = (props) => {
 
   useEffect(() => {
     setSearchedPoke(
-      props.pokemons.filter((el) => {
+      pokemons.filter((el) => {
         const regex = new RegExp(`${text}`, "gi");
         return el.name.toString().match(regex);
       })
@@ -47,6 +50,10 @@ const PokeSearch = (props) => {
       {text !== "" && <SearchedPokes searchedContent={searchedPoke} />}
     </div>
   );
+};
+
+PokeSearch.propTypes = {
+  pokemons: PropTypes.array.isRequired,
 };
 
 export default PokeSearch;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const GetPokemonForm = (props) => {
+const GetPokemonForm = () => {
   return (
     <>
       <form

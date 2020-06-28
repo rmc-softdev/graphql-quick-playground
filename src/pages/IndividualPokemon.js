@@ -14,7 +14,7 @@ import LoadingSpinner from "../utils/LoadingSpinner";
 const IndividualPokemon = () => {
   const params = useParams();
   const [text, setText] = useState("");
-  const [showCongratulations, setShowCongratulations] = useState(true);
+  const [showCongratulations, setShowCongratulations] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const caughtPokemons = useSelector((state) => state.caughtPokemons);
   const dispatch = useDispatch();
@@ -26,7 +26,8 @@ const IndividualPokemon = () => {
     }
   );
   if (loading) return <LoadingSpinner asOverlay />;
-  if (error) return `Error! ${error.message}`;
+  if (error)
+    return <h3 style={{ textAlign: "center" }}> Error! {error.message}</h3>;
   const {
     image,
     name,
@@ -54,9 +55,8 @@ const IndividualPokemon = () => {
           type: "ADD_POKE",
           payload: pokemon,
         });
-        setTimeout(() => {
-          setShowCongratulations(false);
-        }, 3000);
+
+        setShowCongratulations(true);
       }
     }
   };
@@ -78,6 +78,9 @@ const IndividualPokemon = () => {
             height: "100vh",
             flexDirection: "column",
             cursor: "auto",
+            position: "absolute",
+            width: "100vw",
+            top: "140px",
           }}
         >
           <h3>
@@ -200,7 +203,6 @@ const IndividualPokemon = () => {
                               opacity: 1,
                               transition: {
                                 opacity: {
-                                  delay: 2,
                                   duration: 2,
                                   ease: "easeInOut",
                                 },
