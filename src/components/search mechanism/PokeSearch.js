@@ -23,8 +23,12 @@ const PokeSearch = ({ pokemons }) => {
     );
   }, [text]);
 
+  const handleChange = (e) => {
+    setText(e.target.value);
+  };
+
   return (
-    <div className="search container">
+    <div className="search container" data-testid="search-container">
       <form onSubmit={onTermSubmit}>
         <div className="search-wrapper">
           <span className="search-icon">
@@ -39,11 +43,13 @@ const PokeSearch = ({ pokemons }) => {
           </span>
           <input
             className="search-input"
-            onChange={(e) => setText(e.target.value)}
+            onChange={handleChange}
             value={text}
             placeholder="Find an awesome Poke"
             onMouseEnter={() => setFill("#333")}
             onMouseLeave={() => setFill("#acacac")}
+            aria-label="search-input"
+            data-testid="search-input"
           />
         </div>
       </form>

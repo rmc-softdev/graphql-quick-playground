@@ -183,6 +183,7 @@ const IndividualPokemon = () => {
                       </span>
                       <input
                         type="text"
+                        aria-label="add pokemon"
                         id="name"
                         placeholder={`Type ${name}'s ID here.`}
                         style={{
