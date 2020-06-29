@@ -9,7 +9,10 @@ const initialState = {
 const middleware = [thunk];
 
 if (localStorage.getItem("caughtpokes") === null) {
-  localStorage.setItem("caughtpokes", JSON.stringify(initialState));
+  localStorage.setItem(
+    "caughtpokes",
+    JSON.stringify(initialState.caughtPokemons)
+  );
 } else {
   initialState.caughtPokemons = JSON.parse(localStorage.getItem("caughtpokes"));
 }

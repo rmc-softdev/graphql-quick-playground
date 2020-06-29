@@ -33,7 +33,7 @@ const PokeDex = ({ closeModalHandler }) => {
       >
         {caughtPokemons?.length !== 0 ? (
           <ul style={{ padding: 0 }}>
-            {caughtPokemons.map((poke) => (
+            {caughtPokemons?.map((poke) => (
               <li key={poke?.id}>
                 <div
                   className="results-items"
