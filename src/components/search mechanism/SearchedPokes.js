@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SearchedPoke.css";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,8 +8,8 @@ const SearchedPokes = ({ searchedContent }) => {
 
   const renderContent = () => {
     return searchedContent.slice(0, 10).map((poke) => (
-      <Link to={`/pokemon/${poke.name.toLowerCase()}`}>
-        <li key={poke.id}>
+      <Link to={`/pokemon/${poke.name.toLowerCase()}`} key={poke.id}>
+        <li>
           <div className="results-items">
             <AnimatePresence>
               <motion.div

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/react-hooks";
 import { useSelector, useDispatch } from "react-redux";
@@ -31,10 +31,10 @@ const IndividualPokemon = () => {
   const {
     image,
     name,
-    id,
+    id, // eslint-disable-line
     attacks,
-    maxCP,
-    maxHP,
+    maxCP, // eslint-disable-line
+    maxHP, // eslint-disable-line
     number,
     types,
     resistant,

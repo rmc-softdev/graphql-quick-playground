@@ -21,7 +21,7 @@ const PokeSearch = ({ pokemons }) => {
         return el.name.toString().match(regex);
       })
     );
-  }, [text]);
+  }, [text, pokemons]);
 
   const handleChange = (e) => {
     setText(e.target.value);

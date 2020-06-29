@@ -28,6 +28,7 @@ export const PokemonCard = ({ pokemon: { name, image, number, types } }) => {
                   margin: "0 5px",
                   backgroundColor: `var(--${el.toLowerCase()})`,
                 }}
+                key={el}
               >
                 {" "}
                 {el}{" "}
