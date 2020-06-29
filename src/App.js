@@ -6,7 +6,6 @@ import { Route } from "react-router-dom";
 import { Provider } from "react-redux";
 
 import IndividualPokemon from "./pages/IndividualPokemon";
-// import store from "./store";
 import { PokemonsShowCase } from "./pages/PokemonsShowCase";
 import store from "./store";
 
