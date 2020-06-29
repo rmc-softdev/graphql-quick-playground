@@ -1,12 +1,26 @@
-image: node:12.14.0
-
 stages:
   - test
   - build
   - deploy
 
-test:
-  stage: test
+eslint:
+  image: node:12.14.0
+  stage: code_quality
+  before_script:
+    - npm instaill -g eslint
   script:
-    - npm
+    - eslint -- --ext .jsx,.js src/
+unit_tests:
+  image: node:12.14.0
+  stage: test
+  before_script:
+    - npm install
+  script:
     - npm test
+react_build:
+  image: node:12.14.0
+  stage: build
+  before_script:
+    - npm install
+  script:
+    - npm run-script build
