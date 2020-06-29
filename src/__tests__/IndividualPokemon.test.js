@@ -2,13 +2,12 @@ import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import user from "@testing-library/user-event";
 import IndividualPokemon from "../pages/IndividualPokemon";
-import { isType } from "graphql";
 
 it("should accepts values for the app", () => {
-  //fix the useParams() problem
-  // const mockIndividualPokemon = jest.fn();
+  const mockIndividualPokemon = jest.fn();
   // const { debug } = render(<IndividualPokemon />);
   // debug();
+
   // const { debug, getByLabelText, getByText } = render(<IndividualPokemon />);
   // const Input = getByLabelText(/add pokemon/i);
   // user.type(Input, "001");
