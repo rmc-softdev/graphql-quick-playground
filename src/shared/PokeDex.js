@@ -25,7 +25,7 @@ const PokeDex = ({ closeModalHandler }) => {
         }}
       >
         {" "}
-        Pokemons I love
+        My PokeDex
       </div>
       <div
         className="results showcase"

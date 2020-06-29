@@ -179,7 +179,7 @@ const IndividualPokemon = () => {
                           marginRight: "5px ",
                         }}
                       >
-                        e.g., 007
+                        <label htmlFor="name">e.g., 007</label>
                       </span>
                       <input
                         type="text"
@@ -292,6 +292,7 @@ const IndividualPokemon = () => {
                                           />
                                         </div>
                                       </div>
+                                      <div> {console.log(el.attacks)} </div>
                                     </>
                                   );
                                 }

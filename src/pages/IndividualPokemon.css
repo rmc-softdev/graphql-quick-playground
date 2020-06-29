@@ -41,3 +41,13 @@
   display: inline-block;
   cursor: pointer;
 }
+
+#name {
+  border-radius: 5px;
+}
+
+#name:focus {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 4px #c99eed;
+}

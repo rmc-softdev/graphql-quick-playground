@@ -2,11 +2,11 @@ import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 
+//I've left thunk here for completeness but the requests towards the API are handled by the apollo client and graphQL
+const middleware = [thunk];
 const initialState = {
   caughtPokemons: [],
 };
-
-const middleware = [thunk];
 
 if (localStorage.getItem("caughtpokes") === null) {
   localStorage.setItem(
@@ -16,6 +16,8 @@ if (localStorage.getItem("caughtpokes") === null) {
 } else {
   initialState.caughtPokemons = JSON.parse(localStorage.getItem("caughtpokes"));
 }
+
+//also, please note that this organization is not scalable, for a bigger project we would have extracted our reducers (potentially many) from the store
 
 const rootReducer = (state = initialState, action) => {
   let stateCopy;
