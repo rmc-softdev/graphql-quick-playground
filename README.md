@@ -1,6 +1,8 @@
 ## About this app
 This project has been sent to me as a home challenge for a position that I was applying for. I added several layers of complexity, such as mixed state management with Apollo and Redux, handled errors in the UI, added some new features from both React and JS (such as Code Splitting and Optional Chaining (ES2020)) and much more.
 
+Core technologies used: React, GraphQL, Apollo, Redux (as a bonus), framer-motion.
+
 ## Live demo at https://dexmon-graphql-test.netlify.app
 
 Pokemon Showcase           |  Single Pokemon
