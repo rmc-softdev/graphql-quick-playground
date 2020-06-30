@@ -9,6 +9,7 @@
   border-radius: 8px;
   height: auto;
   overflow-y: scroll;
+  position: relative;
 }
 
 .modal__header {
@@ -27,6 +28,7 @@
 
 .modal__footer {
   padding: 1rem 0.5rem;
+  position: absolute;
 }
 
 @media (min-width: 768px) {
