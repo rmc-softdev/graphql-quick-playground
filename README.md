@@ -5,7 +5,7 @@ This project has been sent to me as a home challenge for a position that I was a
 
 Pokemon Showcase           |  Single Pokemon
 :-------------------------:|:-------------------------:
-![](https://i.ibb.co/QFFXdPY/Soft-Plan-Project.png)  |  ![](https://i.ibb.co/NrzHMKQ/Soft-Plan-Project-4.png) 
+![](https://i.ibb.co/QFFXdPY/Soft-Plan-Project.png)  |  ![](https://i.ibb.co/bR3PsdY/download-3.png) 
 
 PokeDex       |  Search Mechanism
 :-------------------------:|:-------------------------:
