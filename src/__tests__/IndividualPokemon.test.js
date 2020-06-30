@@ -4,10 +4,9 @@ import user from "@testing-library/user-event";
 import IndividualPokemon from "../pages/IndividualPokemon";
 
 it("should accepts values for the app", () => {
-  const mockIndividualPokemon = jest.fn();
+  // const mockIndividualPokemon = jest.fn();
   // const { debug } = render(<IndividualPokemon />);
   // debug();
-
   // const { debug, getByLabelText, getByText } = render(<IndividualPokemon />);
   // const Input = getByLabelText(/add pokemon/i);
   // user.type(Input, "001");
