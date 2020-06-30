@@ -22,4 +22,11 @@
   .search-input {
     width: 250px;
   }
+  .special-attacks {
+    padding: 0 3px;
+    flex-wrap: wrap-reverse;
+  }
+  .special-attack {
+    margin: 5px 0;
+  }
 }

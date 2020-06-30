@@ -354,6 +354,7 @@ const IndividualPokemon = () => {
                     justifyContent: "space-around",
                     padding: "0 35px",
                   }}
+                  className="special-attacks"
                 >
                   {attacks.special.map((el, index) => (
                     <li
@@ -363,6 +364,7 @@ const IndividualPokemon = () => {
                         color: "#fff",
                       }}
                       key={el.name + index}
+                      className="special-attack"
                     >
                       {" "}
                       {el.name}{" "}
