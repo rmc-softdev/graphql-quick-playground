@@ -30,5 +30,5 @@ Aproveitando o cunho do projeto, resolvi inserir alguns elementos extras, como f
 A única potencial dificuldade advinda do projeto foi a implementação de testings. Em particular, a dificuldade advém do fato de ter sido requisitado uma biblioteca específica, como minha experiência prévia era com Enzyme, isso acaba se tornando um grande empecilho, haja vista o tempo de entrega e que não é trivial adaptar testes a novas tecnologias. Por exemplo, a introdução de Redux (como um bônus) por cima do Apollo Client transforma o CRUD automaticamente em um projeto nada trivial, cujo teste de funcionalidade requer bastante minúcia. Comentários foram deixados dentro do arquivo de testes expandindo mais essa nuance.
 
 ## Proposal
+![](https://i.ibb.co/bmNLF3s/softplan.png)
 
-https://i.ibb.co/bmNLF3s/softplan.png
